@@ -1,0 +1,32 @@
+[
+  {
+    "model": "adoptions.animalphoto",
+    "pk": 1,
+    "fields": {
+      "animal": 1,
+      "image_url": "https://placekitten.com/800/500",
+      "is_primary": true,
+      "display_order": 0
+    }
+  },
+  {
+    "model": "adoptions.animalphoto",
+    "pk": 2,
+    "fields": {
+      "animal": 2,
+      "image_url": "https://placekitten.com/750/500",
+      "is_primary": true,
+      "display_order": 0
+    }
+  },
+  {
+    "model": "adoptions.animalphoto",
+    "pk": 3,
+    "fields": {
+      "animal": 3,
+      "image_url": "https://placekitten.com/820/520",
+      "is_primary": true,
+      "display_order": 0
+    }
+  }
+]

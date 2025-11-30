@@ -1,0 +1,37 @@
+{% extends "core/base.html" %}
+
+{% block title %}Donate - Paws a Moment Rescue{% endblock %}
+
+{% block content %}
+<section class="donation-page">
+    <h2>Make a Donation</h2>
+    <p>Your support funds medical care, food, and safe foster homes for animals in need.</p>
+    <form method="post" class="form-card">
+        {% csrf_token %}
+
+        <div class="quick-amounts" aria-label="Quick donation amounts">
+            <button type="button" class="btn btn-secondary btn-amount" data-quick-amount="25">$25</button>
+            <button type="button" class="btn btn-secondary btn-amount" data-quick-amount="50">$50</button>
+            <button type="button" class="btn btn-secondary btn-amount" data-quick-amount="100">$100</button>
+        </div>
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Donate</button>
+    </form>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const amountInput = document.getElementById('id_amount');
+        if (!amountInput) return;
+        document.querySelectorAll('.btn-amount[data-quick-amount]').forEach(function (btn) {
+          btn.addEventListener('click', function (event) {
+            event.preventDefault();
+            amountInput.value = this.getAttribute('data-quick-amount');
+            amountInput.focus();
+          });
+        });
+      });
+    </script>
+</section>
+{% endblock %}

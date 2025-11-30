@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block title %}Apply to adopt {{ animal.name }} - Paws a Moment Rescue{% endblock %}
+
+{% block content %}
+<h2>Apply to adopt {{ animal.name }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit application</button>
+</form>
+{% endblock %}

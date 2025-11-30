@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+
+{% block title %}Adopt - Paws a Moment Rescue{% endblock %}
+
+{% block content %}
+<h2>Adoptable Pets</h2>
+
+<form method="get" class="filters" aria-label="Filter adoptable pets">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search by name or description" />
+    <input type="text" name="species" value="{{ species }}" placeholder="Species" />
+    <input type="text" name="size" value="{{ size }}" placeholder="Size" />
+    <button type="submit">Filter</button>
+    {% if q or species or size %}
+        <a href="{% url 'adoptions:animal_list' %}">Clear</a>
+    {% endif %}
+</form>
+
+<ul class="item-list card-list">
+    {% for animal in animals %}
+        <li class="card pet-card">
+            <div class="card-accent"></div>
+            <div class="card-body">
+                <h3 class="card-title">{{ animal.name }}</h3>
+                <p class="card-meta">{{ animal.species }}{% if animal.breed %} · {{ animal.breed }}{% endif %}
+                    {% if animal.suburb %} · {{ animal.suburb }}{% endif %}</p>
+                <p class="card-status">Status: {{ animal.status|title }}</p>
+                <div class="tag-row">
+                    {% if animal.good_with_kids %}<span class="tag">Good with kids</span>{% endif %}
+                    {% if animal.special_needs %}<span class="tag tag-special">Special needs</span>{% endif %}
+                </div>
+                <a class="btn btn-link" href="{% url 'adoptions:animal_detail' slug=animal.slug %}">View Profile</a>
+            </div>
+        </li>
+    {% empty %}
+        <li>No adoptable pets available right now. Please check back soon!</li>
+    {% endfor %}
+</ul>
+
+{% if page_obj.has_other_pages %}
+<nav class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}{% if q %}&amp;q={{ q }}{% endif %}{% if species %}&amp;species={{ species }}{% endif %}{% if size %}&amp;size={{ size }}{% endif %}">Previous</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if q %}&amp;q={{ q }}{% endif %}{% if species %}&amp;species={{ species }}{% endif %}{% if size %}&amp;size={{ size }}{% endif %}">Next</a>
+    {% endif %}
+</nav>
+{% endif %}
+{% endblock %}

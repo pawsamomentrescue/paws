@@ -1,0 +1,47 @@
+{% extends "core/base.html" %}
+
+{% block title %}Stories - Paws a Moment Rescue{% endblock %}
+
+{% block content %}
+<h2>Stories</h2>
+
+<form method="get" class="filters" aria-label="Filter stories">
+    <input type="text" name="q" value="{{ q }}" placeholder="Search stories" />
+    <select name="type">
+        <option value="">All types</option>
+        <option value="news" {% if type == 'news' %}selected{% endif %}>News</option>
+        <option value="success" {% if type == 'success' %}selected{% endif %}>Success stories</option>
+    </select>
+    <button type="submit">Filter</button>
+    {% if q or type %}
+        <a href="{% url 'stories:story_list' %}">Clear</a>
+    {% endif %}
+</form>
+
+<ul class="item-list card-list">
+    {% for story in stories %}
+        <li class="card story-card">
+            <div class="card-accent"></div>
+            <div class="card-body">
+                <h3 class="card-title">{{ story.title }}</h3>
+                <p class="card-meta">{{ story.get_type_display }}</p>
+                <a class="btn btn-link" href="{% url 'stories:story_detail' slug=story.slug %}">Read story</a>
+            </div>
+        </li>
+    {% empty %}
+        <li>No stories published yet.</li>
+    {% endfor %}
+</ul>
+
+{% if page_obj.has_other_pages %}
+<nav class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}{% if q %}&amp;q={{ q }}{% endif %}{% if type %}&amp;type={{ type }}{% endif %}">Previous</a>
+    {% endif %}
+    <span>Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% if q %}&amp;q={{ q }}{% endif %}{% if type %}&amp;type={{ type }}{% endif %}">Next</a>
+    {% endif %}
+</nav>
+{% endif %}
+{% endblock %}

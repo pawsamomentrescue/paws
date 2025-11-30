@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ story.title }} - Paws a Moment Rescue{% endblock %}
+
+{% block content %}
+<article class="story-detail">
+    <header class="story-hero">
+        <h1>{{ story.title }}</h1>
+        <p class="story-hero-meta">{{ story.get_type_display }}</p>
+        {% if story.related_animal %}
+            <p class="story-hero-meta">Featuring <a href="{% url 'adoptions:animal_detail' slug=story.related_animal.slug %}">{{ story.related_animal.name }}</a></p>
+        {% endif %}
+    </header>
+    <div class="story-body">
+        {{ story.body|linebreaks }}
+    </div>
+</article>
+{% endblock %}

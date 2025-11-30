@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ animal.name }} - Paws a Moment Rescue{% endblock %}
+
+{% block content %}
+<section class="pet-detail">
+    <header class="pet-hero">
+        <h1>{{ animal.name }}</h1>
+        <p class="pet-hero-meta">{{ animal.species }}{% if animal.breed %} · {{ animal.breed }}{% endif %}
+            {% if animal.suburb %} · {{ animal.suburb }}{% endif %}</p>
+    </header>
+    <div class="pet-layout">
+        <div class="pet-main">
+            {% if primary_photo %}
+            <div class="pet-photo-main">
+                <img src="{{ primary_photo.image_url }}" alt="Photo of {{ animal.name }}" />
+            </div>
+            {% endif %}
+            {% if photos %}
+            <ul class="pet-photo-thumbs">
+                {% for photo in photos %}
+                    <li>
+                        <img src="{{ photo.image_url }}" alt="Photo of {{ animal.name }}" />
+                    </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <h2>About {{ animal.name }}</h2>
+            <p>Status: <strong>{{ animal.status|title }}</strong></p>
+            <p>{{ animal.description }}</p>
+        </div>
+        <aside class="pet-vitals">
+            <h2>Vitals</h2>
+            <ul>
+                {% if animal.age_years %}<li><strong>Age:</strong> {{ animal.age_years }} years</li>{% endif %}
+                {% if animal.size %}<li><strong>Size:</strong> {{ animal.size }}</li>{% endif %}
+                {% if animal.sex %}<li><strong>Sex:</strong> {{ animal.sex }}</li>{% endif %}
+                {% if animal.weight_kg %}<li><strong>Weight:</strong> {{ animal.weight_kg }} kg</li>{% endif %}
+                {% if animal.adoption_fee %}<li><strong>Adoption fee:</strong> ${{ animal.adoption_fee }}</li>{% endif %}
+                {% if animal.suburb %}<li><strong>Location:</strong> {{ animal.suburb }}</li>{% endif %}
+                <li><strong>Status:</strong> {{ animal.status|title }}</li>
+            </ul>
+            <ul class="pet-flags">
+                <li><strong>Good with kids:</strong> {{ animal.good_with_kids|yesno:"Yes,No" }}</li>
+                <li><strong>Special needs:</strong> {{ animal.special_needs|yesno:"Yes,No" }}</li>
+                <li><strong>Microchipped:</strong> {{ animal.microchipped|yesno:"Yes,No" }}</li>
+                <li><strong>Vaccinated:</strong> {{ animal.vaccinated|yesno:"Yes,No" }}</li>
+                <li><strong>Desexed:</strong> {{ animal.desexed|yesno:"Yes,No" }}</li>
+            </ul>
+            <a class="btn btn-primary" href="{% url 'adoptions:apply' slug=animal.slug %}">Apply to adopt {{ animal.name }}</a>
+        </aside>
+    </div>
+</section>
+{% endblock %}

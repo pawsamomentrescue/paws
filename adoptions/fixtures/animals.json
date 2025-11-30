@@ -1,0 +1,59 @@
+[
+  {
+    "model": "adoptions.animal",
+    "pk": 1,
+    "fields": {
+      "name": "Buddy",
+      "slug": "buddy",
+      "species": "Dog",
+      "breed": "Labrador Retriever",
+      "age_years": 3,
+      "size": "Medium",
+      "sex": "Male",
+      "description": "Friendly and energetic lab mix who loves walks and fetch.",
+      "status": "available",
+      "intake_date": "2025-01-01",
+      "photo_url": "",
+      "created_at": "2025-01-15T12:00:00Z",
+      "updated_at": "2025-01-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "adoptions.animal",
+    "pk": 2,
+    "fields": {
+      "name": "Whiskers",
+      "slug": "whiskers",
+      "species": "Cat",
+      "breed": "Domestic Shorthair",
+      "age_years": 2,
+      "size": "Small",
+      "sex": "Female",
+      "description": "Calm and affectionate cat who enjoys sunny windowsills.",
+      "status": "available",
+      "intake_date": "2025-01-05",
+      "photo_url": "",
+      "created_at": "2025-01-16T12:00:00Z",
+      "updated_at": "2025-01-16T12:00:00Z"
+    }
+  },
+  {
+    "model": "adoptions.animal",
+    "pk": 3,
+    "fields": {
+      "name": "Max",
+      "slug": "max",
+      "species": "Dog",
+      "breed": "German Shepherd",
+      "age_years": 5,
+      "size": "Large",
+      "sex": "Male",
+      "description": "Loyal and intelligent companion, best in an active home.",
+      "status": "available",
+      "intake_date": "2025-01-10",
+      "photo_url": "",
+      "created_at": "2025-01-20T12:00:00Z",
+      "updated_at": "2025-01-20T12:00:00Z"
+    }
+  }
+]

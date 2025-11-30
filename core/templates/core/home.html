@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+
+{% block title %}Home - Paws a Moment Rescue{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Paws a Moment and Rescue</h1>
+        <p>Central Coast foster &amp; adoption. Helping pets find their forever homes.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="{% url 'adoptions:animal_list' %}">View Available Pets</a>
+            <a class="btn btn-secondary" href="{% url 'donations:donate' %}">Donate</a>
+        </div>
+    </div>
+</section>
+
+<section class="home-section">
+    <h2>Featured Pets</h2>
+    <ul class="item-list card-list">
+        {% for animal in featured_animals %}
+            <li class="card pet-card">
+                <div class="card-accent"></div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ animal.name }}</h3>
+                    <p class="card-meta">{{ animal.species }}{% if animal.breed %} · {{ animal.breed }}{% endif %}</p>
+                    <p class="card-status">Status: {{ animal.status|title }}</p>
+                    <a class="btn btn-link" href="{% url 'adoptions:animal_detail' slug=animal.slug %}">View Profile</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>No adoptable pets available right now. Please check back soon!</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="home-section how-it-works">
+    <h2>How Adoption Works</h2>
+    <ol class="steps">
+        <li>
+            <h3>1. View</h3>
+            <p>Browse adoptable pets and find a good match for your home.</p>
+        </li>
+        <li>
+            <h3>2. Apply</h3>
+            <p>Submit a short application so our team can get to know you.</p>
+        </li>
+        <li>
+            <h3>3. Meet</h3>
+            <p>We arrange a meet-and-greet and help you complete the adoption.</p>
+        </li>
+    </ol>
+</section>
+
+<section class="home-section">
+    <h2>Latest News &amp; Success Stories</h2>
+    <ul class="item-list card-list">
+        {% for story in recent_stories %}
+            <li class="card story-card">
+                <div class="card-accent"></div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ story.title }}</h3>
+                    <p class="card-meta">{{ story.get_type_display }}</p>
+                    <a class="btn btn-link" href="{% url 'stories:story_detail' slug=story.slug %}">Read story</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>No stories yet. Stay tuned!</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="donate-strip">
+    <div class="donate-strip-inner">
+        <h2>Every donation helps pets find safety and love.</h2>
+        <p>Your support funds vet care, food, and transport for animals in foster care.</p>
+        <a class="btn btn-primary" href="{% url 'donations:donate' %}">Donate Now</a>
+    </div>
+</section>
+{% endblock %}

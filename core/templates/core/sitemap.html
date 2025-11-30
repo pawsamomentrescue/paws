@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+
+{% block title %}Sitemap - Paws a Moment Rescue{% endblock %}
+
+{% block content %}
+<section class="home-section">
+    <h1>Sitemap</h1>
+
+    <h2>Public pages</h2>
+    <ul>
+        <li><a href="{% url 'core:home' %}">Home</a></li>
+        <li><a href="{% url 'adoptions:animal_list' %}">Adoptable Pets</a></li>
+        <li><a href="{% url 'core:how_adoption_works' %}">How Adoption Works</a></li>
+        <li><a href="{% url 'stories:story_list' %}">Stories &amp; News</a></li>
+        <li><a href="{% url 'donations:donate' %}">Donate</a></li>
+        <li><a href="{% url 'core:about' %}">About</a></li>
+        <li><a href="{% url 'core:contact' %}">Contact</a></li>
+    </ul>
+
+    <h2>Adoption flows</h2>
+    <ul>
+        <li>Adoptable pets list: <code>/adopt/</code></li>
+        <li>Single pet profile: <code>/adopt/&lt;slug&gt;/</code></li>
+        <li>Adoption application form: <code>/adopt/&lt;slug&gt;/apply/</code></li>
+    </ul>
+
+    <h2>Stories &amp; news</h2>
+    <ul>
+        <li>Stories index: <code>/stories/</code> with filters for type and search.</li>
+        <li>Single story: <code>/stories/&lt;slug&gt;/</code></li>
+    </ul>
+
+    <h2>Donations</h2>
+    <ul>
+        <li>Donate: <code>/donate/</code></li>
+        <li>Thank you page: <code>/donate/thanks/</code></li>
+    </ul>
+
+    <h2>Admin (staff only)</h2>
+    <ul>
+        <li><a href="/admin/">Django admin</a> for managing animals, photos, applications, stories, and donations.</li>
+    </ul>
+</section>
+{% endblock %}
